@@ -1,0 +1,60 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+
+# Asset meta files should be tracked
+# .meta files are Unity's way of tracking asset metadata
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# JetBrains Rider
+*.dotSettings.user
+
+# Gradle
+.gradle/
+
+# NDK/NDK-related
+local.properties
+
+# Roslyn Analyzers
+*.sarif
+
+# Git LFS
+*.psd
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.tif
+*.psb
+*.exr
+*.hdr
+*.fbx
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# TextMesh Pro
+Assets/TextMesh Pro/Resources/Fonts & Materials/
