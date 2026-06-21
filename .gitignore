@@ -71,6 +71,14 @@ local.properties
 # Roslyn
 *.sarif
 
+# NuGet packages
+Assets/NuGet.config
+Assets/Packages/
+Assets/packages.config
+
+# IDE
+.vscode/
+
 # Git LFS
 *.psd
 *.png
