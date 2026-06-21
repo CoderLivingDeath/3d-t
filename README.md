@@ -29,9 +29,16 @@ Assets/Project/Scripts/
 
 ## Stack
 
-| Library | Version | Notes |
-|---------|---------|-------|
-| Reflex  | 14.3.1  | DI: `MonoBehaviour, IInstaller` → `InstallBindings(ContainerBuilder)` |
-| UniTask | 2.5.11  | Use `UniTask`/`UniTask<T>`, never `Task` |
-| LitMotion | UPM   | Tweening |
-| Input System | 1.19.0 | Generated `InputSystem_Actions` |
+| Library | Type | Notes |
+|---------|------|-------|
+| Reflex  | DI | `MonoBehaviour, IInstaller` → `InstallBindings(ContainerBuilder)` |
+| UniTask | Async | Use `UniTask`/`UniTask<T>`, never `Task` |
+| LitMotion | Tweening | UPM git dependency |
+| Unity MCP | AI tooling | Unity → Claude/Copilot bridge |
+| NuGetForUnity | Package mgmt | NuGet packages in Unity |
+| Cinemachine | Camera | v3.1 |
+| ProBuilder | Level design | v6.1 |
+| Input System | Input | v1.19 — generated `InputSystem_Actions` |
+| URP | Rendering | v17.4 |
+| VFX Graph | VFX | v17.4 |
+| AFPC | Character | Advanced First-Person Controller (asset) |
