@@ -2,13 +2,13 @@ using System;
 using UnityEngine;
 using _3dt.Infrastructure;
 
-public class ResourcesAssetsServiceService
+public class ResourcesAssetsServiceService : IAssetsService
 {
-    private readonly ResourceAssetsRepository _resourceAssetsRepository;
+    private readonly IReadOnlyRepository<UnityEngine.Object> _resourceAssetsRepository;
 
-    public ResourcesAssetsServiceService(ResourceAssetsRepository resourceAssetsRepository)
+    public ResourcesAssetsServiceService(IReadOnlyRepository<UnityEngine.Object> repository)
     {
-        _resourceAssetsRepository = resourceAssetsRepository;
+        _resourceAssetsRepository = repository;
     }
 
     public IResult<T> Get<T>(string keyOrPath)

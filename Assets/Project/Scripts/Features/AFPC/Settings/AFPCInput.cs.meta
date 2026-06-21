@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: 3b7dffe2080b8004bb77d18ca12001b0
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167675
+  packageName: Advanced First-Person Controller
+  packageVersion: 2.8
+  assetPath: Assets/AFPC/Settings/AFPCInput.cs
+  uploadId: 901764

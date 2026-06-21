@@ -5,6 +5,5 @@ public class GameplayInstaller : MonoBehaviour, IInstaller
 {
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
-        throw new System.NotImplementedException();
     }
 }

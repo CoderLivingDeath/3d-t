@@ -3,6 +3,8 @@
   <Project Path="UniTask.Linq.csproj" />
   <Project Path="UniTask.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="AFPC.csproj" />
+  <Project Path="AFPC.Editor.csproj" />
   <Project Path="Reflex.Editor.csproj" />
   <Project Path="UniTask.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />

@@ -1,0 +1,237 @@
+#damage-fx {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200, 30, 30, 0);
+}
+
+#hud {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    width: 192px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px;
+    border-radius: 4px;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.bar {
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.29);
+    justify-content: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.bar-fill--shield {
+    background-color: rgb(74, 158, 219);
+}
+
+.bar-fill--health {
+    background-color: rgb(217, 68, 68);
+}
+
+.bar-fill--endurance {
+    background-color: rgb(68, 184, 74);
+}
+
+.bar-labels {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+}
+
+.bar-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 8px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 4px;
+    padding-bottom: 0;
+    padding-left: 4px;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+}
+
+.bar-label--name {
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+}
+
+/* ── Crosshair ── */
+
+#crosshair-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#crosshair {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ch-col {
+    flex-direction: column;
+    align-items: center;
+}
+
+.ch-dot {
+    width: 2px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.ch-arm--h {
+    width: 6px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.ch-arm--v {
+    width: 1px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#interaction-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 9px;
+    margin-top: 10px;
+    -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+    -unity-font-style: bold;
+    letter-spacing: 1px;
+}
+
+#extensions-panel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    min-width: 96px;
+}
+
+.ext-row {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 1px;
+    border-left-width: 2px;
+    border-left-color: rgba(255, 255, 255, 0);
+}
+
+.ext-row--active {
+    background-color: rgba(255, 200, 60, 0.18);
+    border-left-color: rgb(255, 200, 60);
+}
+
+.ext-label {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 8px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 6px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+    -unity-font-style: bold;
+}
+
+.ext-row--active > .ext-label {
+    color: rgba(255, 200, 60, 0.95);
+}
+
+#hints {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background-color: rgba(0, 0, 0, 0);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.hint-row {
+    flex-direction: row;
+    margin-bottom: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.hint-key {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 0;
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 48px;
+}
+
+.hint-action {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 8px;
+    width: 48px;
+    -unity-font-definition: url("project://database/Assets/AFPC/Fonts/KatahdinRound.otf?fileID=12800000&guid=eba60de6692844bc4aa7dfe2610b30c0&type=3#KatahdinRound");
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 2px;
+    padding-bottom: 0;
+    padding-left: 2px;
+    background-color: rgba(0, 0, 0, 0.8);
+}

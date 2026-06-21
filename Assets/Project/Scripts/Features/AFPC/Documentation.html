@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFPC Documentation</title>
+<style>
+    :root {
+        --bg: #0e0e0e;
+        --surface: #161616;
+        --surface2: #1c1c1c;
+        --border: #2a2a2a;
+        --text: #d4d4d4;
+        --text-dim: #808080;
+        --accent-red: #d94444;
+        --accent-blue: #4a9edb;
+        --accent-green: #44b84a;
+        --accent-yellow: #e6c020;
+        --accent-gray: #888;
+        --accent-purple: #a06ac4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* Sidebar */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 260px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 32px 0;
+        overflow-y: auto;
+        z-index: 10;
+    }
+
+    nav .logo {
+        padding: 0 24px 24px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: #fff;
+    }
+
+    nav .logo span {
+        font-weight: 300;
+        color: var(--text-dim);
+        font-size: 11px;
+        display: block;
+        letter-spacing: 0;
+        margin-top: 2px;
+    }
+
+    nav a {
+        display: block;
+        padding: 8px 24px;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.15s;
+    }
+
+    nav a:hover {
+        color: #fff;
+        background: rgba(255,255,255,0.04);
+    }
+
+    nav .nav-section {
+        padding: 16px 24px 6px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+    }
+
+    nav .nav-section.red { color: var(--accent-red); }
+    nav .nav-section.blue { color: var(--accent-blue); }
+    nav .nav-section.green { color: var(--accent-green); }
+    nav .nav-section.yellow { color: var(--accent-yellow); }
+    nav .nav-section.purple { color: var(--accent-purple); }
+
+    /* Main */
+    main {
+        margin-left: 260px;
+        max-width: 820px;
+        padding: 48px 56px 120px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+
+    h1 + p {
+        color: var(--text-dim);
+        margin-bottom: 48px;
+        font-size: 15px;
+    }
+
+    h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 56px 0 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+        color: #fff;
+    }
+
+    h2 .accent {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        margin-right: 8px;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+    }
+
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 32px 0 12px;
+        color: #eee;
+    }
+
+    h4 {
+        font-size: 13px;
+        font-weight: 600;
+        margin: 20px 0 8px;
+        color: var(--text-dim);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    p {
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    /* Code */
+    code {
+        font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+        background: var(--surface2);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12.5px;
+        color: #ccc;
+    }
+
+    pre {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin: 12px 0 20px;
+        overflow-x: auto;
+        font-size: 12.5px;
+        line-height: 1.8;
+    }
+
+    pre code {
+        background: none;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .keyword { color: #c586c0; }
+    .type { color: #4ec9b0; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .method { color: #dcdcaa; }
+    .number { color: #b5cea8; }
+    .param { color: #9cdcfe; }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0 20px;
+        font-size: 13px;
+    }
+
+    th {
+        text-align: left;
+        padding: 10px 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-dim);
+    }
+
+    td {
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        vertical-align: top;
+    }
+
+    td code {
+        font-size: 12px;
+    }
+
+    tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+
+    /* Callouts */
+    .callout {
+        border-left: 3px solid var(--accent-blue);
+        background: rgba(74, 158, 219, 0.06);
+        padding: 14px 18px;
+        margin: 16px 0;
+        border-radius: 0 6px 6px 0;
+        font-size: 13px;
+    }
+
+    .callout.warn {
+        border-left-color: var(--accent-yellow);
+        background: rgba(230, 192, 32, 0.06);
+    }
+
+    .callout strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    /* Method signature */
+    .method-sig {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 10px 16px;
+        margin: 8px 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+        color: #ccc;
+    }
+
+    .method-sig .ret { color: #4ec9b0; }
+    .method-sig .name { color: #dcdcaa; }
+    .method-sig .par { color: #9cdcfe; }
+
+    /* Event list */
+    .event-list {
+        list-style: none;
+        margin: 8px 0 20px;
+    }
+
+    .event-list li {
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+    }
+
+    .event-list li:last-child { border-bottom: none; }
+
+    .event-list code {
+        min-width: 180px;
+        display: inline-block;
+    }
+
+    /* Steps */
+    .steps {
+        counter-reset: step;
+        list-style: none;
+        margin: 16px 0;
+    }
+
+    .steps li {
+        counter-increment: step;
+        padding: 8px 0 8px 36px;
+        position: relative;
+        font-size: 14px;
+    }
+
+    .steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        text-align: center;
+        font-size: 11px;
+        line-height: 20px;
+        color: var(--text-dim);
+        font-weight: 600;
+    }
+
+    /* File tree */
+    .file-tree {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 4px 0;
+        margin: 12px 0 20px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+    }
+
+    .file-tree .row {
+        display: flex;
+        align-items: center;
+        padding: 5px 20px;
+        gap: 10px;
+        transition: background 0.1s;
+    }
+
+    .file-tree .row:hover {
+        background: rgba(255,255,255,0.03);
+    }
+
+    .file-tree .indent-1 { padding-left: 40px; }
+    .file-tree .indent-2 { padding-left: 60px; }
+
+    .file-tree .icon {
+        width: 16px;
+        text-align: center;
+        flex-shrink: 0;
+        font-size: 11px;
+    }
+
+    .file-tree .icon.dir { color: var(--accent-blue); }
+    .file-tree .icon.file { color: var(--text-dim); }
+    .file-tree .icon.cs { color: var(--accent-green); }
+    .file-tree .icon.ui { color: var(--accent-yellow); }
+    .file-tree .icon.input { color: var(--accent-red); }
+
+    .file-tree .name {
+        color: var(--text);
+        font-weight: 500;
+        min-width: 200px;
+    }
+
+    .file-tree .name.dir-name {
+        color: var(--accent-blue);
+        font-weight: 600;
+    }
+
+    .file-tree .desc {
+        color: var(--text-dim);
+        font-size: 11.5px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .file-tree .sep {
+        height: 1px;
+        background: var(--border);
+        margin: 4px 20px;
+    }
+
+    /* Key bindings */
+    kbd {
+        display: inline-block;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-family: inherit;
+        font-size: 12px;
+        color: var(--text);
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">AFPC<span>Advanced FPS Character Controller</span></div>
+
+    <a href="UseCases.html" style="color:var(--accent-blue);font-size:12px;">&#x2192; Use Cases</a>
+    <a href="#getting-started">Getting Started</a>
+    <a href="#structure">File Structure</a>
+    <a href="#hero">Hero (Integration)</a>
+
+    <div class="nav-section red">Lifecycle</div>
+    <a href="#lifecycle">Overview</a>
+    <a href="#lifecycle-health">Health & Shield</a>
+    <a href="#lifecycle-frenzy">Frenzy</a>
+    <a href="#lifecycle-api">API Reference</a>
+    <a href="#lifecycle-events">Events</a>
+
+    <div class="nav-section blue">Movement</div>
+    <a href="#movement">Overview</a>
+    <a href="#movement-acceleration">Acceleration</a>
+    <a href="#movement-endurance">Endurance</a>
+    <a href="#movement-jumping">Jumping</a>
+    <a href="#movement-crouch">Crouch</a>
+    <a href="#movement-physics">Physics</a>
+    <a href="#movement-api">API Reference</a>
+    <a href="#movement-events">Events</a>
+
+    <div class="nav-section green">Overview</div>
+    <a href="#overview">Overview</a>
+    <a href="#overview-following">Following</a>
+    <a href="#overview-looking">Looking</a>
+    <a href="#overview-aiming">Aiming & Search</a>
+    <a href="#overview-effects">Effects</a>
+    <a href="#overview-crouch-camera">Crouch Camera</a>
+    <a href="#overview-api">API Reference</a>
+    <a href="#overview-events">Events</a>
+
+    <div class="nav-section yellow">UI</div>
+    <a href="#ui">AFPCUI</a>
+
+    <div class="nav-section" style="color: var(--accent-gray);">Input</div>
+    <a href="#input">Input Actions</a>
+    <a href="#input-bindings">Default Bindings</a>
+
+    <div class="nav-section" style="color: var(--accent-gray);">Info</div>
+    <a href="#object-info">AFPCObjectInfo</a>
+
+    <div class="nav-section purple">Extensions</div>
+    <a href="#extensions">AFPCExtension Base</a>
+    <a href="#ext-footsteps">Footsteps</a>
+    <a href="#ext-interaction">Interaction</a>
+    <a href="#ext-leaning">Leaning</a>
+    <a href="#ext-stepclimb">Step Climb</a>
+    <a href="#ext-movingplatform">Moving Platform</a>
+
+    <div class="nav-section" style="color: var(--accent-gray);">Editor</div>
+    <a href="#wizard">AFPC Wizard</a>
+</nav>
+
+<main>
+
+<!-- ════════════════════════════════════════ -->
+<h1>AFPC Documentation</h1>
+<p>Physics-based first person character controller for Unity 6+. Modular, event-driven, fully customizable.</p>
+
+<!-- Summary -->
+<div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; margin-bottom: 32px;">
+    <p style="font-size: 15px; color: #eee; margin-bottom: 16px;">AFPC is a lightweight, modular first-person character controller built on Unity's physics system. Drop it into any project and get moving in minutes &mdash; or extend it with your own logic using virtual methods and UnityEvents.</p>
+    <table style="margin: 0; font-size: 13px;">
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">Movement</td><td style="border: none;">Walk, run, jump, double jump, air control, endurance system</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">Lifecycle</td><td style="border: none;">Health, shield, damage, death, respawn, frenzy state, auto-recovery</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">Camera</td><td style="border: none;">Mouse look, aim zoom, speed FOV, head bobbing, camera shake</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">UI</td><td style="border: none;">UI Toolkit HUD with health, shield, endurance bars and damage flash</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">Input</td><td style="border: none;">Unity Input System with keyboard/mouse and gamepad support</td></tr>
+        <tr><td style="padding: 4px 16px 4px 0; border: none; color: var(--text-dim);">Architecture</td><td style="border: none;">Serializable classes, UnityEvents, virtual methods, custom inspector</td></tr>
+    </table>
+</div>
+
+<!-- Getting Started -->
+<h2 id="getting-started">Getting Started</h2>
+
+<ol class="steps">
+    <li>Create an empty GameObject and add a <code>Rigidbody</code> and <code>CapsuleCollider</code> component to it.</li>
+    <li>Add the <code>Hero</code> component to the same GameObject.</li>
+    <li>Create a <code>Camera</code> in the scene (not parented to the hero).</li>
+    <li>Optionally create a UI GameObject with a <code>UIDocument</code> component and assign the <code>AFPCUI.uxml</code> layout, then add the <code>AFPCUI</code> component.</li>
+    <li>In the Hero inspector under <strong>References</strong>, assign the Rigidbody, Collider, Camera, Input Actions asset, and optionally the UI.</li>
+    <li>Press Play. Use <kbd>WASD</kbd> to move, <kbd>Space</kbd> to jump, <kbd>Shift</kbd> to run.</li>
+</ol>
+
+<div class="callout">
+    <strong>Note</strong>
+    All classes live under the <code>AFPC</code> namespace. Add <code>using AFPC;</code> to your scripts when referencing them.
+</div>
+
+<!-- Structure -->
+<h2 id="structure">File Structure</h2>
+
+<div class="file-tree">
+    <div class="row">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">Scripts/</span>
+        <span class="desc"></span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">Hero.cs</span>
+        <span class="desc">Integration MonoBehaviour &mdash; connects all systems</span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">Lifecycle.cs</span>
+        <span class="desc">Health, shield, damage, death, frenzy</span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">Movement.cs</span>
+        <span class="desc">Physics movement, jumping, running, endurance</span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">Overview.cs</span>
+        <span class="desc">Camera look, aim, FOV effects, shake</span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCExtension.cs</span>
+        <span class="desc">Base class for all Hero extensions</span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCObjectInfo.cs</span>
+        <span class="desc">Serializable info container with ID, icon, description and key-value data</span>
+    </div>
+    <div class="sep"></div>
+    <div class="row indent-1">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">Extensions/</span>
+        <span class="desc">Built-in extensions included with AFPC</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCFootsteps.cs</span>
+        <span class="desc">Distance-based step events with surface detection</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">IInteractable.cs</span>
+        <span class="desc">Interface for interactable objects</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCInteraction.cs</span>
+        <span class="desc">Raycast-based focus and interact system</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCLeaning.cs</span>
+        <span class="desc">Hold-to-lean with camera roll and offset</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCStepClimb.cs</span>
+        <span class="desc">Automatic step-up over small obstacles</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon cs">&#x25C6;</span>
+        <span class="name">AFPCMovingPlatformSupport.cs</span>
+        <span class="desc">Moving and rotating platform tracking with velocity inheritance</span>
+    </div>
+    <div class="sep"></div>
+    <div class="row indent-1">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">UI/</span>
+        <span class="desc"></span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon ui">&#x25C6;</span>
+        <span class="name">AFPCUI.cs</span>
+        <span class="desc">UI Toolkit HUD controller</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon ui">&#x25C6;</span>
+        <span class="name">AFPCUI.uxml</span>
+        <span class="desc">HUD layout template</span>
+    </div>
+    <div class="sep"></div>
+    <div class="row indent-1">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">Editor/</span>
+        <span class="desc"></span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon file">&#x25C6;</span>
+        <span class="name">HeroEditor.cs</span>
+        <span class="desc">Custom inspector for Hero</span>
+    </div>
+    <div class="row indent-2">
+        <span class="icon file">&#x25C6;</span>
+        <span class="name">AFPCWizard.cs</span>
+        <span class="desc">Editor window — scene scan and validation tool</span>
+    </div>
+    <div class="sep"></div>
+    <div class="row">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">Settings/</span>
+        <span class="desc"></span>
+    </div>
+    <div class="row indent-1">
+        <span class="icon input">&#x25C6;</span>
+        <span class="name">AFPCInput.inputactions</span>
+        <span class="desc">Input Action Asset with Player action map</span>
+    </div>
+    <div class="sep"></div>
+    <div class="row">
+        <span class="icon dir">&#x1F4C1;</span>
+        <span class="name dir-name">AFPCExtensions/</span>
+        <span class="desc">Optional extension pack (separate asset) &mdash; movement abilities, modifiers, and more</span>
+    </div>
+</div>
+
+<!-- Hero -->
+<h2 id="hero"><span class="accent" style="background:var(--accent-gray)"></span>Hero</h2>
+
+<p>The <code>Hero</code> class is the glue that connects all systems together. It reads input via Unity's Input System, then delegates to <code>Lifecycle</code>, <code>Movement</code>, and <code>Overview</code> each frame.</p>
+
+<h4>Update Loop</h4>
+<table>
+    <tr><th>Callback</th><th>Systems Called</th></tr>
+    <tr><td><code>Update()</code></td><td>ReadInput, Looking, Aiming, Shaking, Running, Jumping, SetCrouching (camera sync), Runtime (health/shield recovery)</td></tr>
+    <tr><td><code>FixedUpdate()</code></td><td>Crouching (collider), Accelerate (physics movement), RotateRigidbodyToLookDirection</td></tr>
+    <tr><td><code>LateUpdate()</code></td><td>Follow (camera position)</td></tr>
+</table>
+
+<h4>Usage Example</h4>
+<pre><code><span class="keyword">using</span> <span class="type">AFPC</span>;
+
+<span class="comment">// Access the hero's systems from any script</span>
+<span class="type">Hero</span> <span class="param">hero</span> = GetComponent&lt;<span class="type">Hero</span>&gt;();
+<span class="param">hero</span>.lifecycle.<span class="method">Damage</span>(<span class="number">25</span>);
+<span class="param">hero</span>.movement.<span class="method">BanRunning</span>();
+<span class="param">hero</span>.overview.<span class="method">Shake</span>(<span class="number">0.5f</span>);
+
+<span class="comment">// Access hero info for UI</span>
+<span class="keyword">string</span> <span class="param">name</span> = <span class="param">hero</span>.info.ID;
+<span class="type">Sprite</span> <span class="param">icon</span> = <span class="param">hero</span>.info.Icon;
+<span class="keyword">int</span> <span class="param">level</span> = <span class="param">hero</span>.info.<span class="method">GetInt</span>(<span class="string">"level"</span>, <span class="number">1</span>);
+</code></pre>
+
+<!-- ════════════════════════════════════════ -->
+<!-- LIFECYCLE -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="lifecycle"><span class="accent" style="background:var(--accent-red)"></span>Lifecycle</h2>
+
+<p>Manages the health-damage-death cycle. Damage is absorbed by shield first, then health. When health reaches zero, the character dies. Health and shield recover over time at configurable intervals.</p>
+
+<!-- Health & Shield -->
+<h3 id="lifecycle-health">Health & Shield</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>referenceHealth</code></td><td>100</td><td>Maximum health. Health recovers toward this value.</td></tr>
+    <tr><td><code>healthRecoveryInterval</code></td><td>1.0s</td><td>Seconds between each +1 health tick. Set to 0 to disable.</td></tr>
+    <tr><td><code>referenceShield</code></td><td>100</td><td>Maximum shield. Shield absorbs damage before health.</td></tr>
+    <tr><td><code>shieldRecoveryInterval</code></td><td>1.0s</td><td>Seconds between each +1 shield tick. Set to 0 to disable.</td></tr>
+</table>
+
+<p>When <code>Damage(value)</code> is called, shield is reduced first. Any overflow is applied to health. When <code>Heal(value)</code> is called, health is restored first, then shield.</p>
+
+<!-- Frenzy -->
+<h3 id="lifecycle-frenzy">Frenzy</h3>
+
+<p>Frenzy activates when health drops below a percentage threshold. Use it to trigger special effects at low health (screen effects, audio, speed boosts, etc).</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>frenzyThreshold</code></td><td>20%</td><td>Health percentage below which frenzy activates.</td></tr>
+</table>
+
+<!-- Lifecycle API -->
+<h3 id="lifecycle-api">API Reference</h3>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Initialize</span>()</div>
+<p>Sets health and shield to maximum. Call once at start.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Damage</span>(<span class="ret">float</span> <span class="par">value</span>)</div>
+<p>Apply damage. Shield absorbs first, then health. Triggers death at zero health.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Heal</span>(<span class="ret">float</span> <span class="par">value</span>)</div>
+<p>Restore health first, then shield, up to their maximums.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Death</span>()</div>
+<p>Deactivate the character, ban recovery, set health and shield to minimum.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Respawn</span>()</div>
+<p>Reactivate the character, restore health and shield to maximum, allow recovery.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Activate</span>() / <span class="name">Deactivate</span>()</div>
+<p>Toggle character availability. When deactivated, all controller updates are blocked.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowHealthRecovery</span>() / <span class="name">BanHealthRecovery</span>()</div>
+<p>Enable or disable automatic health regeneration.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowShieldRecovery</span>() / <span class="name">BanShieldRecovery</span>()</div>
+<p>Enable or disable automatic shield regeneration.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Runtime</span>()</div>
+<p>Tick health and shield recovery. Called each frame in Update.</p>
+
+<div class="method-sig"><span class="ret">float</span> <span class="name">GetHealthValue</span>() / <span class="name">GetShieldValue</span>()</div>
+<p>Returns the current health or shield value.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">Availability</span>()</div>
+<p>Returns whether the character is active.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsFrenzy</span>()</div>
+<p>Returns whether frenzy state is active.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">SetFrenzyThreshold</span>(<span class="ret">float</span> <span class="par">value</span>)</div>
+<p>Set the frenzy health percentage threshold at runtime.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">SetMaximumHealthAndShield</span>()</div>
+<p>Set health and shield to their maximum reference values. Called automatically on <code>Respawn()</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">SetMinimumHealthAndShield</span>()</div>
+<p>Set health and shield to 1. Called automatically on <code>Death()</code>.</p>
+
+<!-- Lifecycle Events -->
+<h3 id="lifecycle-events">Events</h3>
+
+<ul class="event-list">
+    <li><code>onDamage (float)</code> Fired when damage is taken. Parameter: damage amount.</li>
+    <li><code>onHeal (float)</code> Fired when healed. Parameter: heal amount.</li>
+    <li><code>onDeath</code> Fired when health reaches zero.</li>
+    <li><code>onRespawn</code> Fired on respawn.</li>
+    <li><code>onActivate</code> Fired when the character becomes available.</li>
+    <li><code>onDeactivate</code> Fired when the character becomes unavailable.</li>
+    <li><code>onFrenzyChanged (bool)</code> Fired when frenzy state changes.</li>
+    <li><code>onHealthChanged (float)</code> Fired when health value changes.</li>
+    <li><code>onShieldChanged (float)</code> Fired when shield value changes.</li>
+</ul>
+
+<pre><code><span class="comment">// Subscribe in code</span>
+hero.lifecycle.onDamage.<span class="method">AddListener</span>((<span class="param">amount</span>) => {
+    Debug.<span class="method">Log</span>(<span class="string">"Took "</span> + <span class="param">amount</span> + <span class="string">" damage"</span>);
+});
+
+<span class="comment">// Or assign in the inspector via UnityEvent</span>
+</code></pre>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- MOVEMENT -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="movement"><span class="accent" style="background:var(--accent-blue)"></span>Movement</h2>
+
+<p>Physics-based character movement using Rigidbody velocity. Supports walking, running, jumping (with multi-jump), air control, and an endurance system that limits running and jumping.</p>
+
+<!-- Acceleration -->
+<h3 id="movement-acceleration">Acceleration</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>referenceAcceleration</code></td><td>2.66</td><td>Base walking speed.</td></tr>
+    <tr><td><code>runningAcceleration</code></td><td>5.32</td><td>Speed when running.</td></tr>
+    <tr><td><code>startingSharpness</code></td><td>15.0</td><td>How quickly the character reaches target speed. Higher = snappier.</td></tr>
+    <tr><td><code>stoppingSharpness</code></td><td>20.0</td><td>How quickly the character stops. Higher = less sliding.</td></tr>
+</table>
+
+<!-- Endurance -->
+<h3 id="movement-endurance">Endurance</h3>
+
+<p>Endurance is a shared resource consumed by running and jumping. It recovers automatically when the character is not running.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>referenceEndurance</code></td><td>20.0</td><td>Maximum endurance value.</td></tr>
+    <tr><td><code>enduranceDrainRate</code></td><td>2.0/s</td><td>How fast endurance drains while running.</td></tr>
+    <tr><td><code>enduranceRecoveryRate</code></td><td>1.0/s</td><td>How fast endurance recovers when not running.</td></tr>
+</table>
+
+<!-- Jumping -->
+<h3 id="movement-jumping">Jumping</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>jumpForce</code></td><td>7.5</td><td>Upward velocity applied per jump.</td></tr>
+    <tr><td><code>jumpEnduranceCost</code></td><td>3.0</td><td>Endurance consumed per jump. Blocked if endurance is too low.</td></tr>
+    <tr><td><code>maxJumpCount</code></td><td>1</td><td>Max jumps before landing. Set to 2 for double jump.</td></tr>
+    <tr><td><code>groundDetectionMode</code></td><td>MultiRaycast</td><td>Ground detection method. <strong>Raycast</strong>: single downward ray, works on all geometry. <strong>MultiRaycast</strong>: center ray + ring for better edge detection. <strong>SphereCast</strong>: most forgiving but can fail on modular geometry seams.</td></tr>
+    <tr><td><code>groundCheckRadius</code></td><td>0.25</td><td>Radius of the ray ring (MultiRaycast) or sphere (SphereCast).</td></tr>
+    <tr><td><code>groundCheckSkinWidth</code></td><td>0.1</td><td>Extra distance beyond the collider bottom used for ground detection.</td></tr>
+    <tr><td><code>multiRaycastRayCount</code></td><td>4</td><td>Number of rays in the ring for MultiRaycast mode (3&ndash;8).</td></tr>
+    <tr><td><code>airControlFactor</code></td><td>1.0</td><td>How much input influence the character has while airborne. 0 = no air control, 1 = full control. Values in between give reduced but smooth air steering.</td></tr>
+</table>
+
+<div class="callout">
+    <strong>Jump Buffering</strong>
+    Jump input is buffered in <code>Update()</code> and processed in <code>FixedUpdate()</code> to prevent missed inputs between physics ticks.
+</div>
+
+<!-- Crouch -->
+<h3 id="movement-crouch">Crouch</h3>
+
+<p>Crouching shrinks the capsule collider and lowers the camera. The collider transitions smoothly over time. The character cannot stand up if there is a ceiling overhead.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>crouchMode</code></td><td>Hold</td><td><strong>Hold</strong>: crouch while button held. <strong>Toggle</strong>: press once to crouch, press again to stand.</td></tr>
+    <tr><td><code>crouchHeight</code></td><td>0.8</td><td>Capsule height while crouching. Must be less than standing height.</td></tr>
+    <tr><td><code>crouchSpeedReduction</code></td><td>0.5</td><td>Fraction of walk speed removed while crouching. 0 = no reduction, 1 = cannot move.</td></tr>
+    <tr><td><code>crouchTransitionSpeed</code></td><td>10.0</td><td>How fast the collider and camera lerp between standing and crouching. Shared by both.</td></tr>
+    <tr><td><code>ceilingMask</code></td><td>Default</td><td>Layers checked for ceiling clearance before standing up.</td></tr>
+</table>
+
+<div class="callout">
+    <strong>Collider Transition</strong>
+    The capsule height and center lerp in <code>FixedUpdate()</code> so the physics simulation and collider change are always in sync, preventing camera jitter on the first frame.
+</div>
+
+<!-- Physics -->
+<h3 id="movement-physics">Physics</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>mass</code></td><td>70 kg</td><td>Rigidbody mass.</td></tr>
+    <tr><td><code>height</code></td><td>1.6</td><td>Capsule collider height. Also used for ground check position.</td></tr>
+    <tr><td><code>drag</code></td><td>3.0</td><td>Rigidbody drag while grounded.</td></tr>
+    <tr><td><code>airDrag</code></td><td>0.5</td><td>Rigidbody drag while airborne.</td></tr>
+    <tr><td><code>groundMask</code></td><td>Default</td><td>Layer mask for ground detection.</td></tr>
+    <tr><td><code>isGeneratePhysicMaterial</code></td><td>true</td><td>Auto-generate a frictionless physic material on initialize.</td></tr>
+</table>
+
+<!-- Slopes -->
+<h3 id="movement-slopes">Slopes</h3>
+
+<p>Slope handling prevents the character from walking up surfaces steeper than the slope limit and applies gravity-based sliding on steep surfaces. On walkable slopes, movement speed is optionally adjusted based on incline direction.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>slopeLimit</code></td><td>45&deg;</td><td>Maximum walkable slope angle in degrees. Surfaces steeper than this cause sliding and block uphill movement.</td></tr>
+    <tr><td><code>slopeSlideForceMul</code></td><td>1.0</td><td>Multiplier for gravity-based slide force on steep slopes. 0 = disable sliding entirely.</td></tr>
+    <tr><td><code>uphillSpeedReduction</code></td><td>0.3</td><td>Speed reduction going uphill on walkable slopes (0&ndash;1). 0 = no effect, 1 = full reduction at slopeLimit.</td></tr>
+    <tr><td><code>downhillSpeedBoost</code></td><td>0.15</td><td>Speed boost going downhill on walkable slopes (0&ndash;1). 0 = no effect, 1 = full boost at slopeLimit.</td></tr>
+</table>
+
+<div class="callout">
+    <strong>How It Works</strong>
+    Ground detection runs every <code>FixedUpdate</code> using the selected <code>groundDetectionMode</code>. <strong>Raycast</strong> casts a single ray downward from the capsule center &mdash; immune to modular geometry seams. <strong>MultiRaycast</strong> adds a ring of rays at <code>groundCheckRadius</code> for better edge forgiveness while keeping seam safety. <strong>SphereCast</strong> is the most forgiving at edges but can snag on vertical faces between adjacent colliders. All modes populate the same <code>groundHit</code> data (normal, transform, collider) used for slope handling and platform detection. On steep slopes, gravity is projected onto the slope plane and applied as a sliding force. Input that would push the player uphill is stripped. On walkable slopes, speed is modulated based on the dot product between movement direction and the downhill vector. Jumping is blocked on steep slopes.
+</div>
+
+<!-- Movement API -->
+<h3 id="movement-api">API Reference</h3>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Initialize</span>()</div>
+<p>Configure rigidbody, collider, physic material. Call once at start.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Accelerate</span>()</div>
+<p>Physics movement and jump processing. Call in <code>FixedUpdate</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Jumping</span>()</div>
+<p>Buffer jump input. Call in <code>Update</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Running</span>()</div>
+<p>Handle run speed and endurance drain/recovery. Call in <code>Update</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowMovement</span>() / <span class="name">BanMovement</span>(<span class="ret">bool</span> <span class="par">isStopImmediately</span> = false)</div>
+<p>Enable or disable movement. Optionally zero out velocity immediately.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowRunning</span>() / <span class="name">BanRunning</span>()</div>
+<p>Enable or disable sprinting.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowJumping</span>() / <span class="name">BanJumping</span>()</div>
+<p>Enable or disable jumping.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowAirControl</span>() / <span class="name">BanAirControl</span>()</div>
+<p>Ban sets <code>airControlFactor</code> to 0 (no air steering). Allow restores it to the previously configured value. For gradual air control, set <code>airControlFactor</code> directly (0–1).</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Crouching</span>()</div>
+<p>Process crouch input and trigger collider transition. Call in <code>FixedUpdate</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">StandUp</span>()</div>
+<p>Immediately restore the standing collider. Safe to call externally (e.g. on death).</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowCrouching</span>() / <span class="name">BanCrouching</span>()</div>
+<p>Enable or disable crouching. Calling <code>BanCrouching()</code> while crouching immediately stands the character up.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsCrouching</span>()</div>
+<p>Returns whether the character is currently in the crouch state.</p>
+
+<div class="method-sig"><span class="ret">float</span> <span class="name">GetEnduranceValue</span>()</div>
+<p>Returns current endurance.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">ConsumeEndurance</span>(<span class="ret">float</span> <span class="par">amount</span>)</div>
+<p>Deduct endurance by <code>amount</code>. Fires <code>onEnduranceDepleted</code> if endurance reaches zero.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsGrounded</span>()</div>
+<p>Returns whether the character is on the ground.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsAirborne</span>()</div>
+<p>Returns whether the character is not on the ground. Convenience inverse of <code>IsGrounded()</code>.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">HasGroundHit</span>()</div>
+<p>Whether a ground raycast hit was detected this frame. When true, the hit data is available via <code>GetGroundHit()</code>.</p>
+
+<div class="method-sig"><span class="ret">RaycastHit</span> <span class="name">GetGroundHit</span>()</div>
+<p>The full <code>RaycastHit</code> from ground detection. Only valid when <code>HasGroundHit()</code> is true. Provides normal, point, collider, and distance.</p>
+
+<div class="method-sig"><span class="ret">Collider</span> <span class="name">GetGroundCollider</span>()</div>
+<p>The collider the character is standing on, or null if airborne.</p>
+
+<div class="method-sig"><span class="ret">Transform</span> <span class="name">GetGroundTransform</span>()</div>
+<p>The transform the character is standing on, or null if airborne. Used by <code>AFPCMovingPlatformSupport</code> to track platform motion.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsOnSteepSlope</span>()</div>
+<p>True when grounded on a surface steeper than <code>slopeLimit</code>. The character slides and cannot walk uphill or jump.</p>
+
+<div class="method-sig"><span class="ret">bool</span> <span class="name">IsOnStableGround</span>()</div>
+<p>True when grounded on a walkable surface. Equivalent to <code>IsGrounded() &amp;&amp; !IsOnSteepSlope()</code>.</p>
+
+<div class="method-sig"><span class="ret">float</span> <span class="name">GetGroundSlopeAngle</span>()</div>
+<p>Slope angle in degrees of the surface under the character. 0 when airborne or on flat ground.</p>
+
+<div class="method-sig"><span class="ret">Vector3</span> <span class="name">GetGroundNormal</span>()</div>
+<p>Normal of the ground surface. <code>Vector3.up</code> when airborne.</p>
+
+<!-- Movement Events -->
+<h3 id="movement-events">Events</h3>
+
+<ul class="event-list">
+    <li><code>onLanded</code> Fired when the character lands on the ground.</li>
+    <li><code>onAirborne</code> Fired when the character leaves the ground.</li>
+    <li><code>onJump (int)</code> Fired on each jump. Parameter: current jump count (1 = first, 2 = double).</li>
+    <li><code>onRunStart</code> Fired when the character starts running.</li>
+    <li><code>onRunStop</code> Fired when the character stops running.</li>
+    <li><code>onEnduranceDepleted</code> Fired when endurance reaches zero.</li>
+    <li><code>onCrouchStart</code> Fired when the character enters crouch state.</li>
+    <li><code>onCrouchStop</code> Fired when the character stands back up.</li>
+</ul>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="overview"><span class="accent" style="background:var(--accent-green)"></span>Overview</h2>
+
+<p>Controls the camera: mouse look, aim zoom, FOV effects, head bobbing, camera shake, and object search via raycast. The camera is not parented to the character &mdash; it follows via the <code>Follow()</code> method.</p>
+
+<!-- Following -->
+<h3 id="overview-following">Following</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>isFollowingInstant</code></td><td>true</td><td>Snap camera to target. Disable for smooth follow.</td></tr>
+    <tr><td><code>damping</code></td><td>10.0</td><td>Smooth follow speed when instant is off.</td></tr>
+    <tr><td><code>cameraOffset</code></td><td>(0, 0.8, 0)</td><td>Position offset from character. Y = eye height.</td></tr>
+</table>
+
+<!-- Looking -->
+<h3 id="overview-looking">Looking</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>hideCursor</code></td><td>true</td><td>Lock and hide the OS cursor when the game starts. Disable for games that keep the cursor visible.</td></tr>
+    <tr><td><code>sensitivity</code></td><td>4.0</td><td>Look sensitivity. For mouse input a fixed scale is applied (framerate-independent). For gamepad sticks the value is scaled by <code>Time.deltaTime</code> (degrees per second).</td></tr>
+    <tr><td><code>isHorizontalInverted</code></td><td>false</td><td>Invert horizontal mouse axis.</td></tr>
+    <tr><td><code>isVerticalInverted</code></td><td>true</td><td>Invert vertical mouse axis.</td></tr>
+    <tr><td><code>horizontalRange</code></td><td>0 (unlimited)</td><td>Max horizontal rotation in degrees. 0 = unlimited.</td></tr>
+    <tr><td><code>verticalRange</code></td><td>50</td><td>Max vertical rotation in degrees.</td></tr>
+</table>
+
+<!-- Aiming -->
+<h3 id="overview-aiming">Aiming & Search</h3>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>defaultFOV</code></td><td>80</td><td>Normal field of view.</td></tr>
+    <tr><td><code>aimingFOV</code></td><td>40</td><td>FOV when aiming. Lower = more zoom.</td></tr>
+    <tr><td><code>aimingFOVSmoothing</code></td><td>5</td><td>Speed of the FOV transition when pressing or releasing aim. Independent from Speed FOV smoothing.</td></tr>
+    <tr><td><code>searchMask</code></td><td>Nothing</td><td>Layer mask for the <code>Search()</code> raycast.</td></tr>
+    <tr><td><code>searchDistance</code></td><td>1</td><td>Maximum raycast distance.</td></tr>
+</table>
+
+<p>The <code>Search()</code> method casts a ray forward from the camera and returns the hit <code>GameObject</code>, useful for shooting or interaction systems.</p>
+
+<!-- Effects -->
+<h3 id="overview-effects">Effects</h3>
+
+<h4>Speed FOV</h4>
+<p>Increase FOV based on movement speed for a sense of velocity. Toggle with <code>isSpeedFOV</code>. Velocity is decomposed into local-space axes and each axis contributes to the effect according to its weight.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>speedFOVMax</code></td><td>100</td><td>Maximum FOV at full run speed.</td></tr>
+    <tr><td><code>speedFOVSmoothing</code></td><td>5.0</td><td>Transition speed between FOV values.</td></tr>
+    <tr><td><code>speedFOVThreshold</code></td><td>0.8</td><td>Minimum speed (0–1) before FOV starts increasing.</td></tr>
+    <tr><td><code>speedFOVGlobalWeight</code></td><td>1.0</td><td>Overall multiplier for the speed FOV effect. 0 = disabled.</td></tr>
+    <tr><td><code>speedFOVWeightForward</code></td><td>1.0</td><td>Contribution of forward velocity. Only positive (forward) values count.</td></tr>
+    <tr><td><code>speedFOVWeightStrafe</code></td><td>0.0</td><td>Contribution of lateral (left/right) velocity.</td></tr>
+    <tr><td><code>speedFOVWeightVertical</code></td><td>0.0</td><td>Contribution of vertical (jump/fall) velocity.</td></tr>
+</table>
+
+<h4>Head Bobbing</h4>
+<p>Sinusoidal camera bob while moving. Toggle with <code>isHeadBobbing</code>.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>bobbingSpeed</code></td><td>10.0</td><td>Oscillation speed.</td></tr>
+    <tr><td><code>bobbingAmount</code></td><td>0.05</td><td>Vertical amplitude.</td></tr>
+    <tr><td><code>bobbingRunMultiplier</code></td><td>1.5</td><td>Multiplier applied while running.</td></tr>
+</table>
+
+<h4>Camera Shake</h4>
+<p>Lens shift based shake. Requires the camera's <strong>Physical Camera</strong> mode to be enabled.</p>
+
+<div class="callout warn">
+    <strong>Requirement</strong>
+    Camera shake uses <code>camera.lensShift</code> which requires the Physical Camera checkbox to be enabled on the Camera component.
+</div>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>referenceShakingAmount</code></td><td>0</td><td>Idle shake intensity. The camera continuously lens-shifts by this amount even without a <code>Shake()</code> call.</td></tr>
+    <tr><td><code>shakeAmplitude</code></td><td>1</td><td>Global multiplier applied to every <code>Shake()</code> call. <code>0</code> = no shake, <code>2</code> = double intensity. Does not affect <code>referenceShakingAmount</code>.</td></tr>
+    <tr><td><code>shakeDecayRate</code></td><td>1</td><td>Units per second the shake intensity fades toward <code>referenceShakingAmount</code>. Higher = shorter shakes. e.g. a <code>Shake(0.5f)</code> lasts <code>0.5 / shakeDecayRate</code> seconds.</td></tr>
+</table>
+
+<!-- Crouch Camera -->
+<h3 id="overview-crouch-camera">Crouch Camera</h3>
+
+<p>When the character crouches, the camera smoothly lowers to reflect the reduced eye height. The transition uses <code>Mathf.SmoothDamp</code>, starting from the camera's actual current position to prevent any jump on the first frame. The transition speed is shared with the collider via <code>movement.crouchTransitionSpeed</code>.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>crouchCameraOffset</code></td><td>-0.4</td><td>How far the camera drops when crouching. Negative = down.</td></tr>
+    <tr><td><code>crouchTransitionSpeed</code></td><td>10.0</td><td>Synced from Movement at start. Controls both collider and camera lerp speed.</td></tr>
+</table>
+
+<!-- Overview API -->
+<h3 id="overview-api">API Reference</h3>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Initialize</span>()</div>
+<p>Sync camera rotation and FOV. Call once at start.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Looking</span>()</div>
+<p>Process look rotation. Call in <code>Update</code>. Automatically adapts to the active input device — mouse deltas use a fixed scale factor for framerate-independent sensitivity, while gamepad sticks use <code>Time.deltaTime</code> for smooth continuous rotation. The active device is detected by <code>Hero.ReadInput()</code> via <code>lookingIsMouseDelta</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Aiming</span>()</div>
+<p>Process aim zoom and speed FOV. Call in <code>Update</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Shaking</span>()</div>
+<p>Process camera lens shift. Call in <code>Update</code>.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Shake</span>(<span class="ret">float</span> <span class="par">value</span>)</div>
+<p>Trigger a camera shake. The effective intensity is <code>value × shakeAmplitude</code>. Fires <code>onShake</code> with the raw <code>value</code> before the multiplier.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">Follow</span>(<span class="ret">Vector3</span> <span class="par">target</span>)</div>
+<p>Move camera to target position with offset. Call in <code>LateUpdate</code>.</p>
+
+<div class="method-sig"><span class="ret">GameObject</span> <span class="name">Search</span>()</div>
+<p>Raycast forward from the camera. Returns the hit GameObject or null.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">RotateYaw</span>(<span class="ret">float</span> <span class="par">degrees</span>)</div>
+<p>Add yaw rotation in degrees. Applies immediately to the camera even without mouse input. Used by <code>AFPCMovingPlatformSupport</code> to rotate the view on rotating platforms.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">RotateRigidbodyToLookDirection</span>(<span class="ret">Rigidbody</span> <span class="par">rb</span>)</div>
+<p>Rotate a rigidbody's Y axis to match the camera's horizontal rotation.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">SetCrouching</span>(<span class="ret">bool</span> <span class="par">crouching</span>)</div>
+<p>Notify the camera to start transitioning to crouch or standing eye height. Called automatically by Hero each Update.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">HideCursor</span>()</div>
+<p>Lock and hide the OS cursor. Use when entering gameplay from a menu.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">ShowCursor</span>()</div>
+<p>Unlock and show the OS cursor. Use when opening a menu or pause screen.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowLooking</span>() / <span class="name">BanLooking</span>()</div>
+<p>Enable or disable mouse look.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowAiming</span>() / <span class="name">BanAiming</span>()</div>
+<p>Enable or disable aim zoom.</p>
+
+<div class="method-sig"><span class="ret">void</span> <span class="name">AllowShaking</span>() / <span class="name">BanShaking</span>()</div>
+<p>Enable or disable camera shake.</p>
+
+<!-- Overview Events -->
+<h3 id="overview-events">Events</h3>
+
+<ul class="event-list">
+    <li><code>onAimStart</code> Fired when the player starts aiming.</li>
+    <li><code>onAimStop</code> Fired when the player stops aiming.</li>
+    <li><code>onShake (float)</code> Fired when the camera is shaken. Parameter: shake amount.</li>
+</ul>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- UI -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ui"><span class="accent" style="background:var(--accent-yellow)"></span>AFPCUI</h2>
+
+<p>UI Toolkit based HUD displaying health, shield, and endurance bars with a full-screen damage flash overlay. Requires a <code>UIDocument</code> component on the same GameObject.</p>
+
+<h4>Setup</h4>
+<ol class="steps">
+    <li>Create a GameObject and add a <code>UIDocument</code> component.</li>
+    <li>Assign <code>AFPCUI.uxml</code> as the Source Asset and <code>AFPC.asset</code> as the Panel Settings.</li>
+    <li>Add the <code>AFPCUI</code> component to the same GameObject.</li>
+    <li>Drag the GameObject into the Hero's <strong>UI</strong> slot in the References panel.</li>
+</ol>
+
+<p>The UI automatically links to the Hero on Awake and updates bar widths each frame based on current values. The damage flash triggers on any <code>onDamage</code> event and fades out over 0.5 seconds.</p>
+
+<h4>Customization</h4>
+<p>Edit <code>AFPCUI.uxml</code> to change bar colors, sizes, position, and labels. The script queries elements by name:</p>
+<table>
+    <tr><th>Element Name</th><th>Purpose</th></tr>
+    <tr><td><code>health-fill</code></td><td>Health bar fill (width is set as percentage)</td></tr>
+    <tr><td><code>shield-fill</code></td><td>Shield bar fill</td></tr>
+    <tr><td><code>endurance-fill</code></td><td>Endurance bar fill</td></tr>
+    <tr><td><code>damage-fx</code></td><td>Full-screen red flash overlay</td></tr>
+</table>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- INPUT -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="input"><span class="accent" style="background:var(--accent-gray)"></span>Input Actions</h2>
+
+<p>AFPC uses Unity's Input System package. The included <code>AFPCInput.inputactions</code> asset defines a <strong>Player</strong> action map with the following actions:</p>
+
+<h3 id="input-bindings">Default Bindings</h3>
+
+<table>
+    <tr><th>Action</th><th>Type</th><th>Keyboard & Mouse</th><th>Gamepad</th></tr>
+    <tr><td>Move</td><td>Value (Vector2)</td><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td><td>Left Stick</td></tr>
+    <tr><td>Look</td><td>Value (Vector2)</td><td>Mouse Delta</td><td>Right Stick</td></tr>
+    <tr><td>Jump</td><td>Button</td><td><kbd>Space</kbd></td><td>South Button</td></tr>
+    <tr><td>Run</td><td>Button</td><td><kbd>Left Shift</kbd></td><td>Left Stick Press</td></tr>
+    <tr><td>Aim</td><td>Button</td><td>Right Mouse</td><td>Left Trigger</td></tr>
+    <tr><td>Crouch</td><td>Button</td><td><kbd>Left Ctrl</kbd></td><td>Right Stick Press</td></tr>
+    <tr><td>Damage</td><td>Button</td><td><kbd>R</kbd></td><td>&mdash;</td></tr>
+    <tr><td>Heal</td><td>Button</td><td><kbd>H</kbd></td><td>&mdash;</td></tr>
+    <tr><td>Respawn</td><td>Button</td><td><kbd>T</kbd></td><td>&mdash;</td></tr>
+</table>
+
+<div class="callout">
+    <strong>Demo Actions</strong>
+    Damage, Heal, and Respawn are included for testing purposes. You can remove them from the input asset for production builds.
+</div>
+
+<h4>Custom Input</h4>
+<p>You can replace the input system entirely. The Hero class reads input into these public fields each frame:</p>
+
+<pre><code><span class="comment">// Movement reads from:</span>
+movement.movementInputValues   <span class="comment">// Vector3 (x, y)</span>
+movement.runningInputValue     <span class="comment">// bool</span>
+movement.jumpingInputValue     <span class="comment">// bool (buffered — set true for one frame)</span>
+movement.crouchingInputValue   <span class="comment">// bool (held state, for Hold mode)</span>
+movement.crouchingInputPressed <span class="comment">// bool (one-frame press, for Toggle mode)</span>
+
+<span class="comment">// Overview reads from:</span>
+overview.lookingInputValues    <span class="comment">// Vector2 (x, y)</span>
+overview.lookingIsMouseDelta   <span class="comment">// bool — true = mouse (fixed scale), false = gamepad (Time.deltaTime)</span>
+overview.aimingInputValue      <span class="comment">// bool</span>
+</code></pre>
+
+<p>Write your own input reader by setting these values directly, bypassing the Input System entirely. When providing mouse deltas, set <code>lookingIsMouseDelta = true</code> so that <code>Looking()</code> uses the correct framerate-independent scale. For gamepad or virtual stick input, leave it <code>false</code>.</p>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXTENSIONS -->
+<!-- ════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════ -->
+<!-- OBJECT INFO -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="object-info"><span class="accent" style="background:var(--accent-gray)"></span>AFPCObjectInfo</h2>
+
+<p>A serializable data container attached to <code>Hero</code> and every <code>AFPCExtension</code>. Use it to store display information (name, icon, description) and arbitrary key-value data for game UI, tooltips, inventories, or any system that needs to read metadata at runtime.</p>
+
+<table>
+    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+    <tr><td><code>ID</code></td><td>string</td><td>Identifier. Default: <code>"Unnamed"</code></td></tr>
+    <tr><td><code>Icon</code></td><td>Sprite</td><td>Icon for UI display.</td></tr>
+    <tr><td><code>Description</code></td><td>string</td><td>Free-form description text.</td></tr>
+    <tr><td><code>StringData</code></td><td>List&lt;StringEntry&gt;</td><td>Key-value pairs (string &rarr; string).</td></tr>
+    <tr><td><code>IntData</code></td><td>List&lt;IntEntry&gt;</td><td>Key-value pairs (string &rarr; int).</td></tr>
+    <tr><td><code>FloatData</code></td><td>List&lt;FloatEntry&gt;</td><td>Key-value pairs (string &rarr; float).</td></tr>
+</table>
+
+<h3>API</h3>
+
+<table>
+    <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+    <tr><td><code>Has(key)</code></td><td>bool</td><td>Returns true if any list contains the key.</td></tr>
+    <tr><td><code>GetString(key, fallback)</code></td><td>string</td><td>Returns the string value, or fallback if not found.</td></tr>
+    <tr><td><code>GetInt(key, fallback)</code></td><td>int</td><td>Returns the int value, or fallback if not found.</td></tr>
+    <tr><td><code>GetFloat(key, fallback)</code></td><td>float</td><td>Returns the float value, or fallback if not found.</td></tr>
+</table>
+
+<h3>Usage</h3>
+<pre><code><span class="comment">// Read info from Hero</span>
+<span class="keyword">string</span> <span class="param">name</span> = hero.info.ID;
+<span class="type">Sprite</span> <span class="param">icon</span> = hero.info.Icon;
+<span class="keyword">int</span> <span class="param">level</span> = hero.info.<span class="method">GetInt</span>(<span class="string">"level"</span>, <span class="number">1</span>);
+
+<span class="comment">// Read info from an extension</span>
+<span class="keyword">var</span> <span class="param">ext</span> = hero.<span class="method">GetExtension</span>(<span class="string">"grapple"</span>);
+<span class="keyword">float</span> <span class="param">range</span> = <span class="param">ext</span>.info.<span class="method">GetFloat</span>(<span class="string">"range"</span>, <span class="number">20f</span>);
+
+<span class="comment">// Check if a key exists</span>
+<span class="keyword">if</span> (hero.info.<span class="method">Has</span>(<span class="string">"faction"</span>)) { ... }
+</code></pre>
+
+<div class="callout">
+    <strong>Inspector</strong>
+    The Info section appears automatically in the inspector for Hero and all extensions. It is drawn as a collapsible toggle panel by the base editor class.
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXTENSIONS -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="extensions"><span class="accent" style="background:var(--accent-purple)"></span>Extensions</h2>
+
+<p>Extensions are modular components that plug into <code>Hero</code> via the <code>extensions</code> list and are updated each frame alongside the core systems. They are general-purpose &mdash; an extension can be anything: a movement ability, a status effect, a weapon handler, a trigger system, a runtime modifier, or any custom logic that needs access to the Hero and its subsystems.</p>
+
+<h3>AFPCExtension Base Class</h3>
+
+<p>Add an extension component to the Hero GameObject (or any child), then drag it into the Hero's <strong>Extensions</strong> list in the inspector. The <code>order</code> field controls execution order — lower values run first.</p>
+
+<pre><code><span class="keyword">public class</span> <span class="type">MyAbility</span> : <span class="type">AFPCExtension</span> {
+
+    <span class="keyword">public override void</span> <span class="method">Initialize</span> () {
+        <span class="comment">// Called by Hero.Start() after all systems are ready</span>
+        <span class="comment">// hero reference is available here</span>
+    }
+
+    <span class="keyword">public override void</span> <span class="method">OnUpdate</span> ()      { }   <span class="comment">// called in Hero.Update</span>
+    <span class="keyword">public override void</span> <span class="method">OnFixedUpdate</span> () { }   <span class="comment">// called in Hero.FixedUpdate</span>
+    <span class="keyword">public override void</span> <span class="method">OnLateUpdate</span> ()  { }   <span class="comment">// called in Hero.LateUpdate</span>
+
+    <span class="keyword">public override bool</span> <span class="method">IsActive</span> () => false;   <span class="comment">// return true while ability is running; used by AFPCUI to highlight the extension row</span>
+}</code></pre>
+
+<div class="callout">
+    <strong>hero reference</strong>
+    The <code>hero</code> field is injected before <code>Initialize()</code> is called. Use <code>hero.movement</code>, <code>hero.overview</code>, <code>hero.lifecycle</code> to interact with the core systems.
+</div>
+
+<p>To retrieve an extension at runtime:</p>
+<pre><code><span class="comment">// By type</span>
+<span class="type">MyAbility</span> <span class="param">ability</span> = hero.<span class="method">GetExtension</span>&lt;<span class="type">MyAbility</span>&gt;();
+
+<span class="comment">// By info ID</span>
+<span class="type">AFPCExtension</span> <span class="param">ext</span> = hero.<span class="method">GetExtension</span>(<span class="string">"grapple"</span>);</code></pre>
+
+<div class="callout">
+    <strong>Optional Extension Pack</strong>
+    A separate extension pack is available on the Asset Store with ready-made movement extensions: Dashing, Blinking, Wall Running, Gliding, Climbing, Ledge Grabbing, Hooking, Sliding, Stomping, and utility extensions (Vibrant, Modifying, Triggers, Slow Motion, and more).
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXT: FOOTSTEPS -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ext-footsteps"><span class="accent" style="background:#55d966"></span>AFPCFootsteps</h2>
+
+<p>Fires a step event at regular intervals while the player is grounded and moving. Step timing is distance-based — one step every <em>N</em> meters traveled — so it automatically adapts to walking and running speed without additional configuration. A downward raycast detects the surface under the player and passes a surface tag string to the event, keeping the extension completely audio-agnostic.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>walkStepDistance</code></td><td>2.0</td><td>Meters between steps at walking speed.</td></tr>
+    <tr><td><code>runStepDistance</code></td><td>1.4</td><td>Meters between steps at running speed.</td></tr>
+    <tr><td><code>groundMask</code></td><td>Default</td><td>Layers used for the downward surface raycast.</td></tr>
+    <tr><td><code>rayDistance</code></td><td>1.5</td><td>Length of the downward raycast.</td></tr>
+</table>
+
+<ul class="event-list">
+    <li><code>onStep (string)</code> — fired on each step. Parameter is the <code>PhysicsMaterial</code> name, the layer name if no material is set, or an empty string if nothing was detected.</li>
+</ul>
+
+<h4>Surface Detection</h4>
+<p>The raycast checks <code>hit.collider.sharedMaterial.name</code> first. If the collider has no physics material, it falls back to the layer name of the hit object. Hook the <code>onStep</code> event to a script that selects audio clips by surface name.</p>
+
+<pre><code><span class="comment">// Example: respond to footstep surface in another component</span>
+<span class="keyword">void</span> <span class="method">OnStep</span> (<span class="type">string</span> <span class="param">surface</span>) {
+    <span class="keyword">switch</span> (<span class="param">surface</span>) {
+        <span class="keyword">case</span> <span class="string">"Concrete"</span>: <span class="method">PlayClip</span>(concreteClip); <span class="keyword">break</span>;
+        <span class="keyword">case</span> <span class="string">"Grass"</span>:    <span class="method">PlayClip</span>(grassClip);    <span class="keyword">break</span>;
+        <span class="keyword">default</span>:        <span class="method">PlayClip</span>(defaultClip);  <span class="keyword">break</span>;
+    }
+}</code></pre>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXT: INTERACTION -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ext-interaction"><span class="accent" style="background:#4abfff"></span>AFPCInteraction</h2>
+
+<p>Raycast-based interaction system. Each frame it casts a ray from the camera forward and checks for a component implementing <code>IInteractable</code> on the hit object or any of its parents. Fires focus and unfocus events as the player looks at and away from objects, and calls <code>Interact()</code> when the interact key is pressed.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>interactAction</code></td><td>—</td><td>Input action that triggers interaction.</td></tr>
+    <tr><td><code>interactDistance</code></td><td>2.5</td><td>Maximum interaction range in world units.</td></tr>
+    <tr><td><code>interactMask</code></td><td>Default</td><td>Layers considered for the interaction raycast.</td></tr>
+</table>
+
+<ul class="event-list">
+    <li><code>onFocus (GameObject)</code> — fired when the player starts looking at an interactable.</li>
+    <li><code>onUnfocus</code> — fired when the player looks away from the focused object.</li>
+    <li><code>onInteract (GameObject)</code> — fired on a successful interaction.</li>
+    <li><code>onInteractFailed</code> — fired when interact is pressed but nothing is in range.</li>
+</ul>
+
+<h4>IInteractable Interface</h4>
+<p>Implement this interface on any <code>MonoBehaviour</code> to make it interactable:</p>
+<pre><code><span class="keyword">public class</span> <span class="type">Door</span> : <span class="type">MonoBehaviour</span>, <span class="type">IInteractable</span> {
+
+    <span class="keyword">public void</span> <span class="method">Interact</span> (<span class="type">Hero</span> <span class="param">hero</span>) {
+        <span class="comment">// Called when the player presses the interact key</span>
+        <span class="method">Open</span>();
+    }
+
+    <span class="keyword">public string</span> <span class="method">GetPrompt</span> () => <span class="string">"Open"</span>;   <span class="comment">// shown in UI hint</span>
+}</code></pre>
+
+<h4>API</h4>
+<div class="method-sig"><span class="ret">string</span> <span class="name">GetFocusedPrompt</span> ()</div>
+<p>Returns the <code>GetPrompt()</code> string from the currently focused interactable, or an empty string if nothing is focused. Use this to drive interaction hint UI.</p>
+<div class="method-sig"><span class="ret">GameObject</span> <span class="name">GetFocused</span> ()</div>
+<p>Returns the currently focused <code>GameObject</code>, or <code>null</code>.</p>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXT: LEANING -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ext-leaning"><span class="accent" style="background:#f3a64d"></span>AFPCLeaning</h2>
+
+<p>Hold left or right to lean — the camera rolls and shifts horizontally to simulate peeking around corners. The collider does not move; the lean is purely visual. Applied in <code>LateUpdate</code> after <code>Follow()</code> sets the base camera position, so it stacks correctly with head bobbing, crouch offset, and camera shake without interference.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>leanLeftAction</code></td><td>—</td><td>Input action held to lean left.</td></tr>
+    <tr><td><code>leanRightAction</code></td><td>—</td><td>Input action held to lean right.</td></tr>
+    <tr><td><code>leanAngle</code></td><td>15°</td><td>Maximum camera roll at full lean.</td></tr>
+    <tr><td><code>leanDistance</code></td><td>0.35</td><td>Maximum horizontal camera offset at full lean.</td></tr>
+    <tr><td><code>leanSpeed</code></td><td>10</td><td>Interpolation speed toward the target lean.</td></tr>
+</table>
+
+<ul class="event-list">
+    <li><code>onLeanStart</code> — fired when the player begins leaning from neutral.</li>
+    <li><code>onLeanStop</code> — fired when the player returns to neutral.</li>
+</ul>
+
+<h4>API</h4>
+<div class="method-sig"><span class="ret">float</span> <span class="name">GetLeanValue</span> ()</div>
+<p>Current lean value. <code>-1</code> = fully left, <code>0</code> = neutral, <code>1</code> = fully right.</p>
+
+<!-- ════════════════════════════════════════ -->
+<!-- EXT: STEP CLIMB -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ext-stepclimb"><span class="accent" style="background:#cc8df2"></span>AFPCStepClimb</h2>
+
+<p>Automatically steps up small obstacles. Rigidbody-based controllers do not get free step-climbing unlike <code>CharacterController</code>, so without this extension the player can get caught on curbs, door frames, and small ledges. Uses three raycasts to detect a climbable step ahead — foot-level hit, clearance above, and a surface to land on — then applies a brief upward velocity boost.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>maxStepHeight</code></td><td>0.4</td><td>Maximum obstacle height the player can step over.</td></tr>
+    <tr><td><code>stepUpForce</code></td><td>4.0</td><td>Upward velocity applied when a step is detected.</td></tr>
+    <tr><td><code>checkDistance</code></td><td>0.4</td><td>Forward ray length. Should roughly match the collider radius.</td></tr>
+    <tr><td><code>cooldown</code></td><td>0.3s</td><td>Minimum seconds between step boosts to prevent repeated triggering.</td></tr>
+    <tr><td><code>stepMask</code></td><td>Default</td><td>Layers considered as obstacles.</td></tr>
+</table>
+
+<ul class="event-list">
+    <li><code>onStep</code> — fired each time the player steps up an obstacle.</li>
+</ul>
+
+<div class="callout warn">
+    <strong>Tuning Tips</strong>
+    Keep <code>maxStepHeight</code> well below the player's collider radius to avoid false positives on ramps. If the player bounces on shallow slopes, reduce <code>stepUpForce</code> or increase <code>cooldown</code>.
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- MOVING PLATFORM SUPPORT -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="ext-movingplatform"><span class="accent" style="background:#f29e4d"></span>AFPCMovingPlatformSupport</h2>
+
+<p>Tracks kinematic platforms under the player and applies their translation and rotation. When the player leaves a platform, the platform's velocity is optionally transferred. Zero-config detection &mdash; any kinematic <code>Rigidbody</code> on the ground layer is treated as a platform.</p>
+
+<table>
+    <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>velocityInheritance</code></td><td>1.0</td><td>How much of the platform's velocity transfers to the player when leaving. 0 = none, 1 = full.</td></tr>
+    <tr><td><code>maxInheritedSpeed</code></td><td>30</td><td>Maximum speed that can be inherited from a platform.</td></tr>
+</table>
+
+<ul class="event-list">
+    <li><code>onPlatformEnter</code> &mdash; fired when the player lands on a moving platform.</li>
+    <li><code>onPlatformExit</code> &mdash; fired when the player leaves a moving platform.</li>
+</ul>
+
+<h4>How it works</h4>
+<ol class="steps">
+    <li>Each <code>FixedUpdate</code>, reads <code>movement.GetGroundTransform()</code> to find what the player is standing on.</li>
+    <li>If the ground transform has a kinematic <code>Rigidbody</code>, it is tracked as a platform.</li>
+    <li>Position delta is applied via <code>rb.MovePosition()</code>. Yaw delta is applied via <code>overview.RotateYaw()</code>, including pivot-based displacement for rotating platforms.</li>
+    <li>On exit (jump or walk off), <code>platformVelocity &times; velocityInheritance</code> is added to the player's velocity, clamped by <code>maxInheritedSpeed</code>.</li>
+    <li>Platform-to-platform transfers skip velocity inheritance to prevent speed spikes.</li>
+</ol>
+
+<div class="callout">
+    <strong>Setup</strong>
+    Platforms need a <code>Rigidbody</code> with <code>isKinematic = true</code> and a collider on a layer included in Movement's <code>groundMask</code>. Move them with <code>MovePosition</code> / <code>MoveRotation</code> in <code>FixedUpdate</code> for correct physics interpolation.
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- WIZARD -->
+<!-- ════════════════════════════════════════ -->
+<h2 id="wizard"><span class="accent" style="background:var(--accent-gray)"></span>AFPC Wizard</h2>
+
+<p>An editor window that scans the open scene for <code>Hero</code> components and reports configuration details and errors. Open via <strong>AFPC &rsaquo; Wizard</strong> in the Unity menu bar.</p>
+
+<h4>How to use</h4>
+<ol class="steps">
+    <li>Open the window via <strong>AFPC &rsaquo; Wizard</strong>.</li>
+    <li>The scene is scanned automatically on open.</li>
+    <li>Click <strong>Scan Scene</strong> to re-scan after making changes.</li>
+    <li>Click any entry to ping the corresponding GameObject in the Hierarchy.</li>
+</ol>
+
+<h4>What is checked</h4>
+<table>
+    <tr><th>Panel</th><th>Checks</th></tr>
+    <tr><td>References</td><td>Rigidbody, CapsuleCollider, Camera, InputActionAsset assigned. AFPCUI shown if assigned.</td></tr>
+    <tr><td>Movement</td><td>Walk/run speeds, jump settings, endurance, crouch config, physics, ground mask. Errors if Ground Mask is Nothing or crouch height &ge; standing height.</td></tr>
+    <tr><td>Overview</td><td>FOV values, sensitivity (error if zero), look ranges, Speed FOV and Head Bobbing state.</td></tr>
+    <tr><td>Lifecycle</td><td>Health and shield max and recovery rates, frenzy threshold. Error if health max &le; 0.</td></tr>
+    <tr><td>Extensions</td><td>Count, order, and enabled state of each registered extension. Error if a slot is null.</td></tr>
+</table>
+
+<h4>Entry colors</h4>
+<table>
+    <tr><td style="color:#8eff9e;">&#x25CF; Green</td><td>Reference assigned or check passed.</td></tr>
+    <tr><td style="color:#ffd94d;">&#x25CF; Yellow</td><td>Warning &mdash; valid but potentially misconfigured.</td></tr>
+    <tr><td style="color:#ff8080;">&#x25CF; Red</td><td>Error &mdash; missing reference or broken configuration.</td></tr>
+    <tr><td style="color:#e0e0e0;">&#x25CF; White</td><td>Informational value, no action required.</td></tr>
+</table>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CREDITS -->
+<!-- ════════════════════════════════════════ -->
+<div style="margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border);">
+    <p style="font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">Evgenii Nikolskii</p>
+    <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 2px;">Lead Technical Artist | Glavni tehni&#x10D;ki umetnik</p>
+    <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 16px;">Evgenii Nikolskii PR &mdash; Novi Sad, Serbia</p>
+    <p style="font-size: 11px; color: var(--text-dim); opacity: 0.6; margin-bottom: 0;">This documentation and parts of the codebase were developed with the assistance of AI (Claude, Anthropic).</p>
+</div>
+
+</main>
+</body>
+</html>

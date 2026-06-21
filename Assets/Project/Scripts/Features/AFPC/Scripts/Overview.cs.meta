@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bce8f132d4c9c4c7ab4f466631207366
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167675
+  packageName: Advanced First-Person Controller
+  packageVersion: 2.8
+  assetPath: Assets/AFPC/Scripts/Overview.cs
+  uploadId: 901764

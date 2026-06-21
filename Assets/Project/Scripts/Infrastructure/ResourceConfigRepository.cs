@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceConfigRepository : IReadOnlyRepository<Object>
+public class ResourceConfigRepository : IReadOnlyRepository<Config>
 {
-    private readonly Dictionary<string, Object> _cache = new();
+    private readonly Dictionary<string, Config> _cache = new();
 
-    public Object? Get(string key)
+    public Config Get(string key)
     {
         if (_cache.TryGetValue(key, out var cached))
             return cached;
 
-        var resource = Resources.Load(key);
+        var resource = Resources.Load<Config>(key);
         if (resource == null)
             return null;
 
@@ -18,8 +18,8 @@ public class ResourceConfigRepository : IReadOnlyRepository<Object>
         return resource;
     }
 
-    public IEnumerable<Object> GetAll()
+    public IEnumerable<Config> GetAll()
     {
-        return Resources.LoadAll("/.");
+        return Resources.LoadAll<Config>(".");
     }
 }

@@ -1,0 +1,66 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AFPC/Scripts/UI/AFPCUI.uss?fileID=7433441132597879392&amp;guid=f21962eed4ffea64c93865d4cdea513e&amp;type=3#AFPCUI"/>
+    <ui:VisualElement name="damage-fx" picking-mode="Ignore"/>
+    <ui:VisualElement name="hud" picking-mode="Ignore">
+        <ui:VisualElement class="bar">
+            <ui:VisualElement name="shield-fill" class="bar-fill bar-fill--shield"/>
+            <ui:VisualElement class="bar-labels">
+                <ui:Label text="SHIELD" class="bar-label bar-label--name"/>
+                <ui:Label name="shield-pct" text="100%" class="bar-label"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="bar">
+            <ui:VisualElement name="health-fill" class="bar-fill bar-fill--health"/>
+            <ui:VisualElement class="bar-labels">
+                <ui:Label text="HP" class="bar-label bar-label--name"/>
+                <ui:Label name="health-pct" text="100%" class="bar-label"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement class="bar">
+            <ui:VisualElement name="endurance-fill" class="bar-fill bar-fill--endurance"/>
+            <ui:VisualElement class="bar-labels">
+                <ui:Label text="STAMINA" class="bar-label bar-label--name"/>
+                <ui:Label name="endurance-pct" text="100%" class="bar-label"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="crosshair-root" picking-mode="Ignore">
+        <ui:VisualElement name="crosshair" picking-mode="Ignore" style="width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0); background-image: url(&quot;project://database/Assets/AFPC/Scripts/UI/AFPC_crosshair.png?fileID=2800000&amp;guid=fc40dc4c81c342645903752f6b21b866&amp;type=3#AFPC_crosshair&quot;);"/>
+        <ui:Label name="interaction-label" text="" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; min-height: 32px;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="extensions-panel" picking-mode="Ignore"/>
+    <ui:VisualElement name="hints" picking-mode="Ignore">
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="MOVE" class="hint-action"/>
+            <ui:Label text="W A S D" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="JUMP" class="hint-action"/>
+            <ui:Label text="SPACE" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="CROUCH" class="hint-action"/>
+            <ui:Label text="CTRL" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="RUN" class="hint-action"/>
+            <ui:Label text="SHIFT" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="AIM" class="hint-action"/>
+            <ui:Label text="RMB" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="DAMAGE" class="hint-action"/>
+            <ui:Label text="R" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="HEAL" class="hint-action"/>
+            <ui:Label text="H" class="hint-key"/>
+        </ui:VisualElement>
+        <ui:VisualElement class="hint-row">
+            <ui:Label text="RESPAWN" class="hint-action"/>
+            <ui:Label text="T" class="hint-key"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

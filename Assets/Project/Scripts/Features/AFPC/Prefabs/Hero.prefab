@@ -1,0 +1,598 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &290449656113388698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2379043408610642008}
+  - component: {fileID: 2366463319817675861}
+  m_Layer: 0
+  m_Name: AFPCFootsteps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2379043408610642008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290449656113388698}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807461413602009179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2366463319817675861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290449656113388698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f2f8f9754f42244a7616fbe950d008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AFPC::AFPC.AFPCFootsteps
+  hero: {fileID: 0}
+  order: 0
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  isDebugLog: 0
+  walkStepDistance: 2
+  runStepDistance: 1.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
+  rayDistance: 1.5
+  onStep:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &1057280971716361409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6643503751527557519}
+  - component: {fileID: 8844739787419758747}
+  m_Layer: 0
+  m_Name: AFPCMovingPlatformSupport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6643503751527557519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057280971716361409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807461413602009179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8844739787419758747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057280971716361409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d291cf831675f4d902682418d20edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AFPC::AFPC.AFPCMovingPlatformSupport
+  hero: {fileID: 0}
+  order: 0
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  isDebugLog: 0
+  velocityInheritance: 1
+  maxInheritedSpeed: 30
+  onPlatformEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlatformExit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &1807461413602009159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807461413602009179}
+  - component: {fileID: 1807461413602009156}
+  - component: {fileID: 1807461413602009157}
+  - component: {fileID: 1807461413602009158}
+  m_Layer: 1
+  m_Name: Hero
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1807461413602009179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807461413602009159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2379043408610642008}
+  - {fileID: 3726796029031724940}
+  - {fileID: 2301089747310080908}
+  - {fileID: 7496892704480471736}
+  - {fileID: 6643503751527557519}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1807461413602009156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807461413602009159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ecd681b26b44dc6a0fd8a7479a13e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  UI: {fileID: 0}
+  lifecycle:
+    isDebugLog: 1
+    ID: Hero
+    referenceHealth: 100
+    healthRecoveryInterval: 1
+    referenceShield: 100
+    shieldRecoveryInterval: 1
+    frenzyThreshold: 20
+    onDamage:
+      m_PersistentCalls:
+        m_Calls: []
+    onHeal:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeath:
+      m_PersistentCalls:
+        m_Calls: []
+    onRespawn:
+      m_PersistentCalls:
+        m_Calls: []
+    onActivate:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeactivate:
+      m_PersistentCalls:
+        m_Calls: []
+    onFrenzyChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    onHealthChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    onShieldChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  movement:
+    isDebugLog: 1
+    movementInputValues: {x: 0, y: 0, z: 0}
+    runningInputValue: 0
+    jumpingInputValue: 0
+    crouchingInputValue: 0
+    crouchingInputPressed: 0
+    referenceAcceleration: 5
+    startingSharpness: 15
+    stoppingSharpness: 20
+    runningAcceleration: 10
+    referenceEndurance: 20
+    enduranceDrainRate: 2
+    enduranceRecoveryRate: 1
+    jumpForce: 7.5
+    jumpEnduranceCost: 3
+    maxJumpCount: 2
+    airControlFactor: 1
+    jumpBuffered: 0
+    suppressEnduranceRecovery: 0
+    depletionRecoveryDelay: 2
+    groundCheckRadius: 0.25
+    groundCheckSkinWidth: 0.1
+    groundDetectionMode: 0
+    multiRaycastRayCount: 4
+    onLanded:
+      m_PersistentCalls:
+        m_Calls: []
+    onAirborne:
+      m_PersistentCalls:
+        m_Calls: []
+    onJump:
+      m_PersistentCalls:
+        m_Calls: []
+    onRunStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onRunStop:
+      m_PersistentCalls:
+        m_Calls: []
+    onEnduranceDepleted:
+      m_PersistentCalls:
+        m_Calls: []
+    onCrouchStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onCrouchStop:
+      m_PersistentCalls:
+        m_Calls: []
+    isGeneratePhysicMaterial: 1
+    mass: 70
+    drag: 3
+    airDrag: 0.5
+    height: 1.6
+    crouchHeight: 0.8
+    crouchSpeedReduction: 0.5
+    crouchMode: 0
+    crouchTransitionSpeed: 5
+    groundMask:
+      serializedVersion: 2
+      m_Bits: 1
+    slopeLimit: 45
+    slopeSlideForceMul: 1
+    uphillSpeedReduction: 0.3
+    downhillSpeedBoost: 0.15
+    ceilingMask:
+      serializedVersion: 2
+      m_Bits: 1
+    rb: {fileID: 1807461413602009157}
+    cc: {fileID: 1807461413602009158}
+  overview:
+    onAimStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onAimStop:
+      m_PersistentCalls:
+        m_Calls: []
+    onShake:
+      m_PersistentCalls:
+        m_Calls: []
+    isDebugLog: 1
+    lookingInputValues: {x: 0, y: 0}
+    lookingIsMouseDelta: 0
+    aimingInputValue: 0
+    isFollowingInstant: 1
+    damping: 25
+    cameraOffset: {x: 0, y: 0.8, z: 0}
+    isHorizontalInverted: 0
+    isVerticalInverted: 1
+    sensitivity: 2
+    horizontalRange: 0
+    verticalRange: 50
+    searchMask:
+      serializedVersion: 2
+      m_Bits: 1
+    searchDistance: 1
+    defaultFOV: 80
+    aimingFOV: 40
+    aimingFOVSmoothing: 5
+    isSpeedFOV: 1
+    speedFOVMax: 100
+    speedFOVSmoothing: 0.5
+    speedFOVThreshold: 0.05
+    speedFOVGlobalWeight: 1
+    speedFOVWeightForward: 1
+    speedFOVWeightStrafe: 0.5
+    speedFOVWeightVertical: 0.25
+    speedInput: 0
+    isGrounded: 0
+    isHeadBobbing: 1
+    bobbingSpeed: 10
+    bobbingAmount: 0.05
+    bobbingRunMultiplier: 1.5
+    crouchCameraOffset: -0.4
+    crouchTransitionSpeed: 10
+    referenceShakingAmount: 0
+    shakeAmplitude: 1
+    shakeDecayRate: 1
+    camera: {fileID: 0}
+    hideCursor: 1
+  extensions:
+  - {fileID: 2366463319817675861}
+  - {fileID: 3290339093840094975}
+  - {fileID: 5268163604686769929}
+  - {fileID: 5868248708419206735}
+  - {fileID: 8844739787419758747}
+  inputActions: {fileID: -944628639613478452, guid: e6adac6b7ebe6cf41a0665901851d4ce, type: 3}
+--- !u!54 &1807461413602009157
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807461413602009159}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 1
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &1807461413602009158
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807461413602009159}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4984271697001418324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7496892704480471736}
+  - component: {fileID: 5868248708419206735}
+  m_Layer: 0
+  m_Name: AFPCStepClimb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7496892704480471736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984271697001418324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807461413602009179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5868248708419206735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984271697001418324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c877d656dd8ada4cafffda94c2c46bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AFPC::AFPC.AFPCStepClimb
+  hero: {fileID: 0}
+  order: 0
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  isDebugLog: 0
+  maxStepHeight: 0.4
+  stepUpForce: 4
+  checkDistance: 0.4
+  cooldown: 0.3
+  stepMask:
+    serializedVersion: 2
+    m_Bits: 1
+  onStep:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &5048221589654966737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2301089747310080908}
+  - component: {fileID: 5268163604686769929}
+  m_Layer: 0
+  m_Name: AFPCLeaning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2301089747310080908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5048221589654966737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807461413602009179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5268163604686769929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5048221589654966737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5747baa0cc8ce84099dd22b15b19aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AFPC::AFPC.AFPCLeaning
+  hero: {fileID: 0}
+  order: 0
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  isDebugLog: 0
+  leanLeftAction: {fileID: 7660422366689833389, guid: e6adac6b7ebe6cf41a0665901851d4ce, type: 3}
+  leanRightAction: {fileID: -2183297569560250509, guid: e6adac6b7ebe6cf41a0665901851d4ce, type: 3}
+  leanAngle: 15
+  leanDistance: 0.35
+  leanSpeed: 10
+  onLeanStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeanStop:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &8421068333280736128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3726796029031724940}
+  - component: {fileID: 3290339093840094975}
+  m_Layer: 0
+  m_Name: AFPCInteraction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3726796029031724940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421068333280736128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807461413602009179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3290339093840094975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421068333280736128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a28567545c2ada4c97eaaead342212f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AFPC::AFPC.AFPCInteraction
+  hero: {fileID: 0}
+  order: 0
+  info:
+    ID: Unnamed
+    Icon: {fileID: 0}
+    Description: 
+    StringData: []
+    IntData: []
+    FloatData: []
+  isDebugLog: 0
+  interactAction: {fileID: 897981059920778193, guid: e6adac6b7ebe6cf41a0665901851d4ce, type: 3}
+  interactDistance: 2.5
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 1
+  onFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnfocus:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractFailed:
+    m_PersistentCalls:
+      m_Calls: []

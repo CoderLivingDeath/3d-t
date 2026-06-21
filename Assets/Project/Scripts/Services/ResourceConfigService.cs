@@ -4,16 +4,16 @@ using _3dt.Infrastructure;
 
 public class ResourceConfigService : IConfigService
 {
-    private readonly ResourceConfigRepository repository;
+    private readonly IReadOnlyRepository<Config> _repository;
 
-    public ResourceConfigService()
+    public ResourceConfigService(IReadOnlyRepository<Config> repository)
     {
-        repository = new();
+        _repository = repository;
     }
 
     public IResult<T> Get<T>(string keyOrPath)
     {
-        var entry = repository.Get(keyOrPath);
+        var entry = _repository.Get(keyOrPath);
         if (entry == null)
             return Result<T>.Failure(new Exception($"Config with key '{keyOrPath}' not found"));
 

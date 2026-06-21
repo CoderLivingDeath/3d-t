@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a865142677dff2547a44a8c0ec5c856b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167675
+  packageName: Advanced First-Person Controller
+  packageVersion: 2.8
+  assetPath: Assets/AFPC/Samples/Materials/AFPC_plastic.mat
+  uploadId: 901764
